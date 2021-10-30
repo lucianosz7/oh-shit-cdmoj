@@ -30,6 +30,7 @@ CAMINHO="$PATH_INFO"
 CONTEST="$(cut -d'/' -f2 <<< "$CAMINHO")"
 CONTEST="${CONTEST// }"
 
+
 if [[ "x$CONTEST" == "x" ]] || [[ ! -d "$CONTESTSDIR/$CONTEST" ]]; then
   tela-erro
   exit 0
