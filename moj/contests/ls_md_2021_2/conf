@@ -1,0 +1,5 @@
+CONTEST_ID="ls_md_2021_2"
+CONTEST_NAME="Rei Lacoste"
+CONTEST_START=1635609600
+CONTEST_END=1638288000
+PROBS=( spoj-br PLACAR "Quem vai ser reprovado?" A reprovado.txt cdmoj cartasfora "Jogando Cartas Fora" B jogando-cartas-fora.pdf)
