@@ -13,6 +13,7 @@
 #
 #You should have received a copy of the GNU General Public License
 #along with CD-MOJ.  If not, see <http://www.gnu.org/licenses/>.
+set +o posix
 
 source common.sh
 
@@ -81,11 +82,13 @@ fi
 #mostrar exercicios
 printf "<h2>Problemas</h2>\n"
 TOTPROBS=${#PROBS[@]}
+echo ${#PROBS[@]}
 #((TOTPROBS=TOTPROBS/5))
 SELETOR=
 echo "<ul>"
 for ((i=0;i<TOTPROBS;i+=5)); do
   SELETOR="$SELETOR <option value=\"$i\">${PROBS[$((i+3))]}</option>"
+  echo ${PROBS[$((i+3))]}
   printf "<li>&emsp;&emsp;&emsp;&emsp;<b>${PROBS[$((i+3))]}</b> - ${PROBS[$((i+2))]}"
   LINK="${PROBS[$((i+4))]}"
   if [[ "${PROBS[$((i+4))]}" == "site" ]]; then
@@ -97,22 +100,15 @@ for ((i=0;i<TOTPROBS;i+=5)); do
   if [[ "$LINK" =~ "http://" ]]; then
     printf " - [<a href=\"$LINK\" target=\"_blank\">LINK</a>]</li>\n"
   elif [[ "$LINK" != "none" ]]; then
-    LOOKDIR="/home/html/moj.naquadah.com.br/contests/$CONTEST_ID/"
+    LOOKDIR="/home/oh-shit-cdmoj/moj/contests/$CONTEST_ID/enunciados/"
     #printf " - problem description"
     printf " -"
-    [[ -e "$LOOKDIR/$LINK.html" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID/$LINK.html\" target=\"_blank\">HTML</a>]"
-    [[ -e "$LOOKDIR/$LINK.pdf" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID/$LINK.pdf\" target=\"_blank\">PDF</a>]"
-    [[ -e "$LOOKDIR/$LINK" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID/$LINK\" target=\"_blank\">LINK</a>]</li>\n"
-    printf "</li>\n"
-  else
-    printf "</li>\n"
-  fi
-done
-echo "</ul>"
-
-echo "<br/><br/>"
-printf "<h2>Minhas Submissões</h2>\n"
-cat << EOF
+    echo $BASEURL/contests/$CONTEST_ID$LINK.html
+    [[ -e "$LOOKDIR/$LINK.html" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID$LINK.html\" target=\"_blank\">HTML</a>]"
+    [[ -e "$LOOKDIR/$LINK.pdf" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID$LINK.pdf\" target=\"_blank\">PDF</a>]"
+    [[ -e "$LOOKDIR/$LINK" ]] && printf " [<a href=\"$BASEURL/contests/$CONTEST_ID$LINK\" target=\"_blank\">LINK</a>]</li>\n"
+ [<a href=\"$BASEURL/contests/$CONTEST_ID/$LINK\" target=\"_blank\">LINK</a>]</li>\n"
+at << EOF
 <table border="1" width="100%"> <tr><th>Problema</th><th>Resposta</th><th>Submissão em</th><th>Tempo de Prova</th></tr>
 EOF
 
